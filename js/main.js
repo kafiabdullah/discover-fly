@@ -148,6 +148,30 @@ function updatePriceSummary(totalTicketPrice, vat) {
     // Update total document
     totalAmount.innerText = totalTicketPrice + vat;
 }
+// confirmation event
+const confirmationEvent= document.getElementById('confirmation');
+
+
+
+
+// book now button event handler
+const bookNowBtn = document.getElementById('book-btn');
+bookNowBtn.addEventListener('click', function(){
+    confirmationEvent.innerText = `Your ticked successfully booked, please pay $${
+        totalFirstClassPrice + totalEconomyClassPrice + vat
+    }`;
+    document.getElementById('confirmation').style.margin = "5%";
+    document.getElementById('confirmation').style.border = "2px solid green";
+    document.getElementById('confirmation').style.borderRadius = "10px"
+    document.getElementById('confirmation').style.textAlign = "center";
+    document.getElementById('confirmation').style.padding = "3%";
+    document.getElementById('confirmation').style.fontSize = "30px";
+    document.getElementById('confirmation').style.boxShadow = "5px 5px 30px black";
+    document.getElementById('confirmation').style.backgroundColor = "cyan";
+    
+}) ;
+
+
 
 // Check the value and set default value
 function isEmptyAndSetDefault(document) {
