@@ -35,7 +35,7 @@ let totalEconomyClassPrice = 0;
 let vat = 0;
 
 
-// Increment the firstClassValue
+// Increment the firstClassInput
 firstClassIncrementBtn.addEventListener("click", function () {
     firstClassValue++;
 
@@ -53,3 +53,107 @@ firstClassIncrementBtn.addEventListener("click", function () {
 
     updatePriceSummary(totalTicketPrice, vat);
 });
+
+// Decrement the firstClassInput
+firstClassDecrementBtn.addEventListener("click", function () {
+    if (firstClassValue > 0) {
+        firstClassValue--;
+    }
+
+    // Total FirstClass Ticket Price
+    totalFirstClassPrice = updatePriceCalculation(
+        firstClassInput,
+        firstClassValue,
+        firstClassTicketPrice
+    );
+
+    let totalTicketPrice = totalFirstClassPrice + totalEconomyClassPrice;
+
+    // Calculate the vat
+    vat = totalTicketPrice * 0.1;
+
+    updatePriceSummary(totalTicketPrice, vat);
+});
+
+// Increment the economyClassValue
+economyClassIncrementBtn.addEventListener("click", function () {
+    economyClassValue++;
+
+    // Total economyClass Ticket Price
+    totalEconomyClassPrice = updatePriceCalculation(
+        economyClassInput,
+        economyClassValue,
+        economyClassTicketPrice
+    );
+
+    let totalTicketPrice = totalFirstClassPrice + totalEconomyClassPrice;
+
+    // Calculate the vat
+    vat = totalTicketPrice * 0.1;
+
+    updatePriceSummary(totalTicketPrice, vat);
+});
+
+// Decrement the economyClassValue
+economyClassDecrementBtn.addEventListener("click", function () {
+    if (economyClassValue > 0) {
+        economyClassValue--;
+    }
+
+    // Calculate the total price
+    totalEconomyClassPrice = updatePriceCalculation(
+        economyClassInput,
+        economyClassValue,
+        economyClassTicketPrice
+    );
+
+    let totalTicketPrice = totalFirstClassPrice + totalEconomyClassPrice;
+
+    // Calculate the vat
+    vat = totalTicketPrice * 0.1;
+
+    updatePriceSummary(totalTicketPrice, vat);
+});
+
+// Function for calculate the price
+function updatePriceCalculation(classInput, classValue, classTicketPrice) {
+    classInput.value = classValue;
+
+    // Total FirstClass Ticket Price
+    totalClassPrice = classTicketPrice * classValue;
+
+    return totalClassPrice;
+}
+
+// Function for update price summary
+function updatePriceSummary(totalTicketPrice, vat) {
+    // Update the subtotal
+    subtotalAmount.innerText = totalTicketPrice;
+
+    // Update the vat
+    vatDocument.innerText = vat;
+
+    // Update total document
+    totalAmount.innerText = totalTicketPrice + vat;
+}
+
+// Function for update price summary
+function updatePriceSummary(totalTicketPrice, vat) {
+    // Update the subtotal
+    subtotalAmount.innerText = totalTicketPrice;
+
+    // Update the vat
+    vatAmount.innerText = vat;
+
+    // Update total document
+    totalAmount.innerText = totalTicketPrice + vat;
+}
+
+// Check the value and set default value
+function isEmptyAndSetDefault(document) {
+    if (parseInt(document.value)) {
+        return parseInt(document.value);
+    }
+
+    return 0;
+}
